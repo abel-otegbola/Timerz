@@ -19,7 +19,7 @@ class Timer extends React.Component {
 
     render() {
         return (
-            <Box minWidth={"23%"} p={4} m={2} borderRadius={"10px"} bgColor={"#fff"} border={"1px solid rgba(153, 153, 153, 0.197)"}>
+            <Box p={4} borderRadius={"10px"} bgColor={"#fff"} border={"1px solid rgba(153, 153, 153, 0.197)"}>
                 <Text 
                     m={"0 0 5px 0"} 
                     fontWeight={600}

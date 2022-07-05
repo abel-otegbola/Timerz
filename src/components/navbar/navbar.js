@@ -11,7 +11,7 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <Flex align='center' justify="space-between" border={"1px solid rgba(153, 153, 153, 0.197)"} >
+            <Flex bgColor={'#fff'} zIndex='1000' align='center' justify="space-between" border={"1px solid rgba(153, 153, 153, 0.197)"} position={{ base: "fixed", sm: 'fixed', md:'initial' }} top='0' left={0} width='100%' >
                 <Box className='brand' ml={{ base: '50px', sm: '50px', md:'initial' }}>
                     <span>&#9942;</span> Timer<span>z</span>
                 </Box>

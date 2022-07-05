@@ -161,7 +161,7 @@ class TimersDashboard extends React.Component {
 
     render() {
         return(
-            <Box bgColor={'#fff'} m='2' ml={0} borderRadius={'10px'} flex={1}>
+            <Box bgColor={'#fff'} m={{ base: 0, sm: 0, md: 2 }} ml={{md: 0}} borderRadius={'10px'} flex={1} mt={{ base: "65px", sm: '65px', md: 2 }}>
                 <ToggleableTimerForm onFormSubmit={this.handleCreateFormSubmit}/>
                 <EditableTimerList timers={this.state.timers} 
                     onFormSubmit={this.handleEditFormSubmit} 

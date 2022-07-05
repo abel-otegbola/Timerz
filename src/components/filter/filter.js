@@ -1,5 +1,6 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { Box, Flex, Input, Text, Select, Button, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb } from "@chakra-ui/react";
+import { Box, Flex, Input, Text, Select, Button, RangeSlider, RangeSliderTrack, RangeSliderFilledTrack, RangeSliderThumb, keyframes } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React from "react";
 
 class Filter extends React.Component {
@@ -18,11 +19,14 @@ class Filter extends React.Component {
         this.setState({ time: [0, 600], date: "", category: "All" })
     }
 
+    animationKeyframes = keyframes`from{transform: translate(-100%)} to{transform: translate(0))}`
+    animation = `${this.animationKeyframes} 0.5s ease-in-out`
+
     render() {
         return (
             <>
-            <Button onClick={() => this.setState({ filterDisplay: (this.state.filterDisplay === 'none')? 'block' : 'none' })} display={{ base: 'block', sm: 'block', md:'none' }} position='fixed' top='0px' left='0' h={'58px'} bgColor={'transparent'} borderRadius='0px' border={'1px solid rgba(73, 72, 72, 0.118)'}><HamburgerIcon /></Button>
-            <Box w={['100%', '100%', '300px']} h={['100%', '100%', 'auto']} display={{ base: this.state.filterDisplay, sm: this.state.filterDisplay, md:'block' }} zIndex={{ base: '100', sm: '100', md: '0'}} position={{ base: 'fixed', sm: 'fixed', md: 'initial' }} top={"50px"} right={'0'} className="filter" p={9} pt='4' m={2} borderRadius={"10px"} bgColor={"#fff"} border={"1px solid rgba(153, 153, 153, 0.197)"}>
+            <Button onClick={() => this.setState({ filterDisplay: (this.state.filterDisplay === 'none')? 'block' : 'none' })} display={{ base: 'block', sm: 'block', md:'none' }} position='fixed' top='0px' left='0' h={'58px'}zIndex='10000' bgColor={'transparent'} borderRadius='0px' border={'1px solid rgba(73, 72, 72, 0.118)'}><HamburgerIcon /></Button>
+            <Box as={motion.div} animation={this.animation} w={['100%', '100%', '300px']} h={['100%', '100%', 'auto']} display={{ base: this.state.filterDisplay, sm: this.state.filterDisplay, md:'block' }} zIndex={{ base: '100', sm: '100', md: '0'}} position={{ base: 'fixed', sm: 'fixed', md: 'initial' }} top={"50px"} right={'0'} className="filter" p={9} pt='4' m={2} borderRadius={"10px"} bgColor={"#fff"} border={"1px solid rgba(153, 153, 153, 0.197)"}>
                 <Text fontWeight={600} p={2}>Filter</Text>
                 <hr color="rgba(153, 153, 153, 0.697)" />
                 <Box pt={2}>
