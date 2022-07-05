@@ -13,6 +13,7 @@ class Filter extends React.Component {
 
     handleFilter = () => {
         this.props.onFilter(this.state)
+        this.setState({ filterDisplay: 'none' })
     }
 
     handleCancel = () => {
