@@ -145,10 +145,15 @@ class TimersDashboard extends React.Component {
             this.setState({
                 defaultTimers: this.state.timers.map(timer => {
                     if(timer.id === id) {
+                        if(timer.elapsed < [0,0,1]) {
+                            clearInterval(timer.runningSince)
+                            this.props.timerStarted(-1)
+                        }
                         return {
                             ...timer,
-                            elapsed: TimerStart(timer),
-                            runningSince: newInterval
+                            elapsed: (timer.elapsed < [0,0,1])? [0,0,0] : TimerStart(timer),
+                            runningSince: (timer.elapsed < [0,0,1])? 0 : newInterval,
+                            completed: (timer.elapsed < [0,0,1])? true : timer.completed
                         }
                     }
                     else return timer;
