@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
-import './App.css';
 import Filter from './components/filter/filter';
 import Navbar from './components/navbar/navbar';
 import TimersDashboard from './Timers/TimersDashboard';
