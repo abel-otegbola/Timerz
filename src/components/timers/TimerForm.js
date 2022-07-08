@@ -1,12 +1,15 @@
 import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
-import React from 'react'
+import React from 'react';
+import { TimersContext } from '../../context/TimersContext';
 
 class TimerForm extends React.Component {
     state = {
-        title: this.props.title || "",
-        project: this.props.project || "",
-        elapsed: this.props.elapsed || [0,0,0],
+        title: this.props.timer.title,
+        project: this.props.timer.project,
+        elapsed: this.props.timer.elapsed,
     };
+
+    static contextType = TimersContext;
 
     handleTitleChange = (e) => {
         this.setState({ title: e.target.value})
@@ -28,18 +31,10 @@ class TimerForm extends React.Component {
         }
     }
 
-    handleSubmit = () => {
-        this.props.onFormSubmit({
-            id: this.props.id,
-            title: this.state.title,
-            project: this.state.project,
-            elapsed: this.state.elapsed
-        })
-    }
-
     render() {
-        
-        const submitText = this.props.id ? 'Update' : 'create';
+        const { create, edit } = this.context
+        const action = (this.props.timer.id !== undefined) ? edit : create;
+        const submitText = this.props.timer.id !== undefined ? 'Update' : 'create';
         return (
             <Box maxWidth={'250px'} p={2}  m={2} borderRadius={"10px"} bgColor={"#fff"} border={"1px solid rgba(153, 153, 153, 0.197)"}>
                 <Box className='field' p={1}>
@@ -58,7 +53,7 @@ class TimerForm extends React.Component {
                         <Input type="number" h={'25px'} w='60px' defaultValue={this.state.elapsed[2]} onChange={(e) => this.handleElapsedChange(e, "sec")} />
                     </Flex>
                 </Box>
-                <Button fontSize={10} m={1} bgColor={"purple.400"} color={"#fff"} onClick={this.handleSubmit}>{submitText}</Button>
+                <Button fontSize={10} m={1} bgColor={"purple.400"} color={"#fff"} onClick={() => { action({  id: this.props.timer.id, ...this.state }); this.props.onFormClose()}}>{submitText}</Button>
                 <Button fontSize={10} m={1} onClick={this.props.onFormClose}>Cancel</Button>
             </Box>
         )

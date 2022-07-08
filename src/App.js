@@ -3,6 +3,7 @@ import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import Filter from './components/filter/filter';
 import Navbar from './components/navbar/navbar';
 import TimersDashboard from './Timers/TimersDashboard';
+import TimersContextProvider from './context/TimersContext';
 
 class App extends React.Component {
   state = {
@@ -25,15 +26,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <ChakraProvider>
-        <Box className='App'>
-          <Navbar onSearch={this.onSearch} started={this.state.started}/>
-          <Flex bgColor={"rgba(153, 153, 153, 0.400)"}>
-            <Filter onFilter={this.onFilter}/>
-            <TimersDashboard query={this.state.query} timerStarted={this.onStart} filters={this.state.filters}/>
-          </Flex>
-        </Box>
-      </ChakraProvider>
+        <ChakraProvider>
+        <TimersContextProvider>
+          <Box className='App'>
+            <Navbar onSearch={this.onSearch} started={this.state.started}/>
+            <Flex bgColor={"rgba(153, 153, 153, 0.400)"}>
+              <Filter onFilter={this.onFilter}/>
+              <TimersDashboard query={this.state.query} timerStarted={this.onStart} filters={this.state.filters}/>
+            </Flex>
+          </Box>
+      </TimersContextProvider>
+        </ChakraProvider>
     )
   }
 }
